@@ -17,7 +17,7 @@ function postToServer(){
     var messageToSend = document.getElementById("message").value;
     WS.send(messageToSend);
     document.getElementById("message").value = "";
-    document.getElementById("chatlog").textContent += "Sent message:" + messageToSend + "\n";
+    document.getElementById("chatlog").textContent += getCurrentTime() + " Sent message: " + messageToSend + "\n";
 }
 
 function closeConnect(){
@@ -57,20 +57,20 @@ function createSession(sessionKey) {
     WS = new WebSocket(url);
 
     WS.onopen = function(){
-        document.getElementById("chatlog").textContent += "Connection opened\n";
+        document.getElementById("chatlog").textContent += getCurrentTime() + " Connection opened\n";
     };
 
     WS.onmessage = function(message){
         document.getElementById("chatlog").textContent += "Got response:" + message.data + "\n";
-        console.log("Got response: " + message.data);
+        console.log(getCurrentTime() + " Got response: " + message.data);
     };
 
     WS.onerror = function (event) {
-        document.getElementById("chatlog").textContent += "Got error:" + message.data + "\n";
+        document.getElementById("chatlog").textContent += getCurrentTime() + " Got error:" + message.data + "\n";
     };
 
     WS.onclose = function (event) {
-        document.getElementById("chatlog").textContent += "Connection closed\n";
+        document.getElementById("chatlog").textContent += getCurrentTime() + " Connection closed\n";
     };
 }
 
@@ -80,4 +80,9 @@ function getSslPrefix() {
     }
 
     return "";
+}
+
+function getCurrentTime() {
+    var now = new Date();
+    return ("[" + new Date().toLocaleString() + "]");
 }
