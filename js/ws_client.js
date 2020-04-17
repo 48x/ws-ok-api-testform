@@ -61,7 +61,7 @@ function createSession(sessionKey) {
     };
 
     WS.onmessage = function(message){
-        document.getElementById("chatlog").textContent += "Got response:" + message.data + "\n";
+        document.getElementById("chatlog").textContent += getCurrentTime() + " Got response:" + message.data + "\n";
         console.log(getCurrentTime() + " Got response: " + message.data);
     };
 
